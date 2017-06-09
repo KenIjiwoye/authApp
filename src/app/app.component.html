@@ -1,4 +1,17 @@
 <h1>
-  {{title}}
+  Log On Page
 </h1>
+
+<button (click)="login()" *ngIf="!isLoggedIn">Login</button>
+<button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+
+<div *ngIf="(authService.user | async)?.uid">
+  <h1>Hello, {{(authService.user | async)?.displayName}}!</h1>
+  <img src="{{(authService.user | async)?.photoURL}}" alt="">
+</div>
+
+<div *ngIf="!(authService.user | async)?.uid">
+  <h1>You're not logged in!</h1>
+</div>
+
 <router-outlet></router-outlet>
